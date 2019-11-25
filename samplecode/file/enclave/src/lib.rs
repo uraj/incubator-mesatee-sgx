@@ -21,6 +21,12 @@
 #![cfg_attr(not(target_env = "sgx"), no_std)]
 #![cfg_attr(target_env = "sgx", feature(rustc_private))]
 
+#![feature(register_attr)]
+#![feature(register_tool)]
+
+#![register_tool(taurus)]
+#![register_attr(require_audit, audited, entry_point)]
+
 #[cfg(not(target_env = "sgx"))]
 #[macro_use]
 extern crate sgx_tstd as std;
@@ -43,6 +49,8 @@ struct RandData {
 }
 
 #[no_mangle]
+#[taurus::audited = "fs"]
+#[taurus::entry_point]
 pub extern "C" fn write_file() -> i32 {
 
     let rand = sgx_rand::random::<RandData>();
@@ -77,6 +85,7 @@ pub extern "C" fn write_file() -> i32 {
 }
 
 #[no_mangle]
+#[taurus::entry_point]
 pub extern "C" fn read_file() -> i32 {
 
     let mut data = [0_u8; 10];

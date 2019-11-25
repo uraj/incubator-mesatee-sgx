@@ -45,6 +45,7 @@ use crate::time::Duration;
 /// [`TcpListener`]: ../../std/net/struct.TcpListener.html
 /// [writing]: ../../std/io/trait.Write.html
 ///
+#[taurus::require_audit = "net"]
 pub struct TcpStream(net_imp::TcpStream);
 
 /// A TCP socket server, listening for connections.
@@ -63,6 +64,7 @@ pub struct TcpStream(net_imp::TcpStream);
 /// [`Incoming`]: ../../std/net/struct.Incoming.html
 /// [`TcpListener::incoming`]: #method.incoming
 ///
+#[taurus::require_audit = "net"]
 pub struct TcpListener(net_imp::TcpListener);
 
 /// An iterator that infinitely [`accept`]s connections on a [`TcpListener`].
@@ -73,6 +75,7 @@ pub struct TcpListener(net_imp::TcpListener);
 /// [`accept`]: ../../std/net/struct.TcpListener.html#method.accept
 /// [`incoming`]: ../../std/net/struct.TcpListener.html#method.incoming
 /// [`TcpListener`]: ../../std/net/struct.TcpListener.html
+#[taurus::require_audit = "net"]
 #[derive(Debug)]
 pub struct Incoming<'a> { listener: &'a TcpListener }
 

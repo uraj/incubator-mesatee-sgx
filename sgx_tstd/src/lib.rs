@@ -97,6 +97,11 @@
 #![feature(int_error_matching)]
 #![feature(drain_filter)]
 #![default_lib_allocator]
+#![feature(register_attr)]
+#![feature(register_tool)]
+
+#![register_tool(taurus)]
+#![register_attr(require_audit, audited, entry_point)]
 
 // Explicitly import the prelude. The compiler uses this same unstable attribute
 // to import the prelude implicitly when building crates that depend on std.
@@ -112,7 +117,6 @@ pub use core::{unreachable, unimplemented, write, writeln, r#try, todo};
 #[allow(unused_imports)] // macros from `alloc` are not used on all platforms
 #[macro_use]
 extern crate alloc as alloc_crate;
-
 
 // We always need an unwinder currently for backtraces
 #[allow(unused_extern_crates)]

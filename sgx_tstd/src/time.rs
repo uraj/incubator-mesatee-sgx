@@ -48,6 +48,7 @@ pub use core::time::Duration;
 /// The size of an `Instant` struct may vary depending on the target operating
 /// system.
 ///
+#[taurus::require_audit = "untrusted_time"]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Instant(time::Instant);
 
@@ -74,6 +75,7 @@ pub struct Instant(time::Instant);
 /// The size of a `SystemTime` struct may vary depending on the target operating
 /// system.
 ///
+#[taurus::require_audit = "untrusted_time"]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SystemTime(time::SystemTime);
 

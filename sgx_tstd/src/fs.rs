@@ -34,6 +34,7 @@ use crate::untrusted::path::PathEx;
 ///
 /// Files are automatically closed when they go out of scope.
 ///
+#[taurus::require_audit = "untrusted_fs"]
 pub struct File {
     inner: fs_imp::File,
 }
@@ -45,6 +46,7 @@ pub struct File {
 /// metadata about a file such as its permissions, size, modification
 /// times, etc.
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Clone)]
 pub struct Metadata(fs_imp::FileAttr);
 /// Iterator over the entries in a directory.
@@ -63,6 +65,7 @@ pub struct Metadata(fs_imp::FileAttr);
 /// [`DirEntry`]: struct.DirEntry.html
 /// [`io::Result`]: ../io/type.Result.html
 /// [`Err`]: ../result/enum.Result.html#variant.Err
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Debug)]
 pub struct ReadDir(fs_imp::ReadDir);
 
@@ -73,6 +76,7 @@ pub struct ReadDir(fs_imp::ReadDir);
 /// An instance of `DirEntry` represents an entry inside of a directory on the
 /// filesystem. Each entry can be inspected via methods to learn about the full
 /// path or possibly other metadata through per-platform extension traits.
+#[taurus::require_audit = "untrusted_fs"]
 pub struct DirEntry(fs_imp::DirEntry);
 
 /// Options and flags which can be used to configure how a file is opened.
@@ -97,6 +101,7 @@ pub struct DirEntry(fs_imp::DirEntry);
 /// [result]: ../io/type.Result.html
 /// [file]: struct.File.html
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Clone, Debug)]
 pub struct OpenOptions(fs_imp::OpenOptions);
 
@@ -109,6 +114,7 @@ pub struct OpenOptions(fs_imp::OpenOptions);
 ///
 /// [`readonly`]: struct.Permissions.html#method.readonly
 /// [`PermissionsExt`]: ../os/unix/fs/trait.PermissionsExt.html
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Clone, PartialEq, Eq, Debug)]
 pub struct Permissions(fs_imp::FilePermissions);
 
@@ -116,12 +122,14 @@ pub struct Permissions(fs_imp::FilePermissions);
 /// It is returned by [`Metadata::file_type`] method.
 ///
 /// [`Metadata::file_type`]: struct.Metadata.html#method.file_type
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug)]
 pub struct FileType(fs_imp::FileType);
 
 /// A builder used to create directories in various manners.
 ///
 /// This builder also supports platform-specific options.
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Debug)]
 pub struct DirBuilder {
     inner: fs_imp::DirBuilder,

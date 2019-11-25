@@ -30,6 +30,7 @@ use crate::time::Duration;
 ///
 /// Although UDP is a connectionless protocol, this implementation provides an interface
 /// to set an address where data should be sent and received from.
+#[taurus::require_audit = "net"]
 pub struct UdpSocket(net_imp::UdpSocket);
 
 impl UdpSocket {

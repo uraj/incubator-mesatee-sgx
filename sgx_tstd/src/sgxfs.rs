@@ -30,6 +30,7 @@ use crate::sys_common::{AsInnerMut, FromInner, AsInner, IntoInner};
 /// that the file contains internally.
 ///
 /// Files are automatically closed when they go out of scope.
+#[taurus::require_audit = "fs"]
 pub struct SgxFile {
     inner: fs_imp::SgxFile,
 }

@@ -70,6 +70,7 @@ use core::ops::{self, Deref};
 /// `\\?\`), in which case `/` is *not* treated as a separator and essentially
 /// no normalization is performed.
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Copy, Clone, Debug, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum Prefix<'a> {
     /// Verbatim prefix, e.g. `\\?\cat_pics`.
@@ -260,6 +261,7 @@ fn split_file_at_dot(file: &OsStr) -> (Option<&OsStr>, Option<&OsStr>) {
 ///
 /// Going front to back, a path is made up of a prefix, a starting
 /// directory component, and a body (of normal components)
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Copy, Clone, PartialEq, PartialOrd, Debug)]
 enum State {
     Prefix = 0,         // c:
@@ -280,6 +282,7 @@ enum State {
 ///
 /// Does not occur on Unix.
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Copy, Clone, Eq, Debug)]
 pub struct PrefixComponent<'a> {
     /// The prefix as an unparsed `OsStr` slice.
@@ -340,8 +343,8 @@ impl Hash for PrefixComponent<'_> {
 /// This `enum` is created by iterating over [`Components`], which in turn is
 /// created by the [`components`][`Path::components`] method on [`Path`].
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
-
 pub enum Component<'a> {
     /// A Windows path prefix, e.g., `C:` or `\\server\share`.
     ///
@@ -402,6 +405,7 @@ impl AsRef<Path> for Component<'_> {
 /// This `struct` is created by the [`components`] method on [`Path`].
 /// See its documentation for more.
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Clone)]
 pub struct Components<'a> {
     // The path left to parse components from
@@ -833,6 +837,7 @@ impl FusedIterator for Ancestors<'_> {}
 /// More details about the overall approach can be found in
 /// the [module documentation](index.html).
 ///
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Clone)]
 pub struct PathBuf {
     inner: OsString,
@@ -1294,6 +1299,7 @@ impl AsRef<OsStr> for PathBuf {
 /// More details about the overall approach can be found in
 /// the [module documentation](index.html).
 ///
+#[taurus::require_audit = "untrusted_fs"]
 pub struct Path {
     inner: OsStr,
 }
@@ -1306,6 +1312,7 @@ pub struct Path {
 ///
 /// [`strip_prefix`]: struct.Path.html#method.strip_prefix
 /// [`Path`]: struct.Path.html
+#[taurus::require_audit = "untrusted_fs"]
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct StripPrefixError(());
 
